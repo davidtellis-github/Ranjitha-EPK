@@ -459,7 +459,7 @@ html.motion-off .card::before{ animation-play-state:paused; }
 .actionbar .ico{ width:1.15em; height:1.15em; }
 .subhead{ font-weight:600; font-size:24px; letter-spacing:-.015em; margin:48px 0 16px; }
 .clips-panel{
-  --pad:16px; margin:56px calc(-1 * var(--gutter)) 0; padding:22px 0 24px;
+  --pad:16px; margin:0 calc(-1 * var(--gutter)) 0; padding:22px 0 24px;
   background:var(--ink); color:var(--stage);
 }
 .clips-panel :focus-visible{ outline-color:var(--stage); }
@@ -501,7 +501,7 @@ html.motion-off .card::before{ animation-play-state:paused; }
   .follow{ width:100%; justify-content:center; }
 }
 @media (min-width:900px){
-  .clips-panel{ --pad:32px; margin:72px 0 0; padding:30px 0 34px; border-radius:28px; }
+  .clips-panel{ --pad:32px; margin:0; padding:30px 0 34px; border-radius:28px; }
   .clips-head{ margin-bottom:26px; }
 }
 .reels.print-only{ display:none; }
@@ -554,7 +554,7 @@ html.motion-off .card::before{ animation-play-state:paused; }
 .sp-go .ico{ color:#1DB954; width:1.1em; height:1.1em; }
 .sp-row:hover b{ text-decoration:underline; text-decoration-color:var(--rule-strong); }
 @media (min-width:760px){
-  .more-sp{ display:grid; grid-template-columns:minmax(0,7fr) minmax(0,5fr); column-gap:clamp(28px,4vw,72px); margin-top:56px; }
+  .more-sp{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,2fr); column-gap:clamp(28px,4vw,72px); margin-top:56px; }
   .more-sp .label{ padding-top:20px; }
   .sp-row{ grid-template-columns:64px minmax(0,1fr) auto; }
   .sp-go{ grid-column:auto; }
@@ -900,7 +900,7 @@ footer .wrap{ display:flex; flex-wrap:wrap; gap:6px 24px; justify-content:space-
     <nav class="nav" aria-label="Sections">
       <a href="#stages">Stages</a>
       <a href="#releases">Releases</a>
-      <a href="#watch">Watch</a>
+      <a href="#watch">Live clips</a>
       <a href="#range">Range</a>
       <a href="#formats">Formats</a>
     </nav>
@@ -925,7 +925,7 @@ footer .wrap{ display:flex; flex-wrap:wrap; gap:6px 24px; justify-content:space-
                 <li><a href="#about">About</a></li>
                 <li><a href="#stages">Stages</a></li>
                 <li><a href="#releases">Releases</a></li>
-                <li><a href="#watch">Watch</a></li>
+                <li><a href="#watch">Live clips</a></li>
                 <li><a href="#range">Range</a></li>
                 <li><a href="#booking">Booking</a></li>
               </ul>
@@ -1216,17 +1216,13 @@ footer .wrap{ display:flex; flex-wrap:wrap; gap:6px 24px; justify-content:space-
 </section>
 
 <!-- ================= Watch ================= -->
-<section id="watch" aria-labelledby="watch-h">
+<section id="watch" class="watch" aria-labelledby="watch-h">
   <div class="wrap">
-    <div class="head">
-      <h2 class="h2" id="watch-h">Watch</h2>
-      <p class="voice intro">Clips from live shows.</p>
-    </div>
     <div class="clips-panel">
       <div class="clips-head">
         <div class="clips-title">
           <span class="clips-mark"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-instagram"/></svg></span>
-          <div><h3 class="subhead">Live clips</h3><p class="clips-sub">Reels from Instagram</p></div>
+          <div><h2 class="subhead" id="watch-h">Live clips</h2><p class="clips-sub">Instagram clips</p></div>
         </div>
         <div class="clips-side">
           <a class="follow" href="https://www.instagram.com/the_ranjitha_yellur/" target="_blank" rel="noopener">@the_ranjitha_yellur<span>17.8K followers</span><span class="sr-only"> (opens in a new tab)</span></a>
