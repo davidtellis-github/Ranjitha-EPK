@@ -86,7 +86,7 @@ section{ padding-block:var(--section) 0; scroll-margin-top:24px; }
 h1,h2,h3,dt,button,.btn,.label,.caps-link,.name,.hero-title,.rot,.rot-print,.mono-mark,.rail-mark,.nav a,
 .row-main,.video-title,.release-title,.booking-title,.channel b,.subhead,.follow,.reel,.langs b,.bands p,
 .gtitle,.gmeta,.gchip,.gsound,.sound-label,.fkicker,.fbig,.freq-cta,.b dd b,.attrib b,.avatar,.pull,.qmark,
-.tcard.is-pending b,.fmt-tab,.card-rail a,.draftbar{ font-family:var(--grot); }
+.fmt-tab,.card-rail a,.draftbar{ font-family:var(--grot); }
 .voice{ font-family:var(--body); font-weight:450; font-size:19px; line-height:1.5; }
 @media (min-width:760px){ .voice{ font-size:22px; } }
 .intro{ color:var(--muted); max-width:44ch; margin-top:16px; }
@@ -191,7 +191,7 @@ html.motion-off .card::before{ animation-play-state:paused; }
 .seg-track{ position:relative; display:block; width:100%; height:3px; border-radius:3px; background:var(--rule-strong); overflow:hidden; }
 .seg-fill{ position:absolute; inset:0; background:var(--ink); transform-origin:0 50%; transform:scaleX(0); }
 .seg.is-active .seg-fill{ transform:scaleX(1); }
-.segs.is-rotating .seg.is-active .seg-fill{ animation:segFill 4s linear both; }
+.segs.is-rotating .seg.is-active .seg-fill{ animation:segFill 2s linear both; }
 @keyframes segFill{ from{ transform:scaleX(0); } to{ transform:scaleX(1); } }
 .seg:hover .seg-track{ background:var(--muted); }
 .seg:focus-visible{ outline-offset:2px; }
@@ -290,6 +290,11 @@ html.motion-off .card::before{ animation-play-state:paused; }
   .b-lead dt{ font-size:clamp(120px,12vw,196px); }
   .b-social .ico{ top:22px; right:22px; }
 }
+
+/* ---------- Stage highlights heading ---------- */
+.highlights-head{ display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:6px 24px; margin-bottom:18px; }
+.highlights-title{ font-weight:600; font-size:clamp(26px,5.6vw,40px); line-height:1.05; letter-spacing:-.025em; }
+.highlights-sub{ color:var(--muted); font-size:16px; }
 
 /* ---------- Rows (stages, releases, range, reels) ---------- */
 .rows{ border-top:1px solid var(--rule-strong); }
@@ -419,8 +424,6 @@ html.motion-off .card::before{ animation-play-state:paused; }
 .who{ display:grid; gap:2px; }
 .who b{ font-weight:500; font-size:17px; line-height:1.2; }
 .who span{ font-size:14.5px; line-height:1.3; color:var(--muted); }
-.tcard.is-pending{ border-style:dashed; border-color:var(--rule-strong); align-content:center; gap:8px; min-height:240px; font-size:16px; }
-.tcard.is-pending b{ font-weight:500; font-size:13px; letter-spacing:.08em; text-transform:uppercase; }
 @media (min-width:900px){
   .testi-head{ margin-bottom:40px; }
   .tcard{ padding:40px 40px 32px; gap:22px; border-radius:26px; }
@@ -722,6 +725,7 @@ footer .wrap{ display:flex; flex-wrap:wrap; gap:6px 24px; justify-content:space-
   .row{ grid-template-columns:5fr 5fr 2fr; padding:3mm 0; break-inside:avoid; }
   .row-main{ font-size:14pt; } .row-detail{ grid-column:2; font-size:10.5pt; } .row-type{ grid-column:3; grid-row:auto; text-align:right; }
   .bands{ margin-top:7mm; } .bands p{ font-size:17pt; max-width:none; }
+  .highlights-head{ margin-bottom:3mm; } .highlights-title{ font-size:15pt; } .highlights-sub{ font-size:9.5pt; }
   .sound-toggle,.gallery-hint,.gplay,.gsound,.gprog,.gcard video{ display:none !important; }
   .stage-gallery{ grid-template-columns:repeat(9,1fr); gap:2mm; margin-bottom:7mm; }
   .gcard,.gcard.t,.gcard.w,.gcard.w.m-half{ grid-column:auto; aspect-ratio:9/16; border-radius:2.5mm; break-inside:avoid; }
@@ -981,7 +985,10 @@ footer .wrap{ display:flex; flex-wrap:wrap; gap:6px 24px; justify-content:space-
         <figcaption class="gcap"><span class="gtitle">With the band</span><span class="gmeta">Live set</span></figcaption>
       </figure>
     </div>
-    <p class="note draft-only" style="margin:-36px 0 48px">Pending: captions only describe what is visible. Confirm the event for each clip and photo: which Lamborghini evening the two Lamborghini clips are from (Falaknuma Palace, Hyderabad or Shivamogga), and whether the Porsche clips are from the Coorg evening.</p>
+    <div class="highlights-head">
+      <h3 class="highlights-title">Highlight performances</h3>
+      <p class="highlights-sub">A selection from 250+ shows across India.</p>
+    </div>
     <ul class="rows">
       <li class="row"><span class="row-main">Lamborghini South</span><span class="row-detail">Bull Run, Falaknuma Palace, Hyderabad</span><span class="label row-type">Luxury auto</span></li>
       <li class="row"><span class="row-main">Lamborghini</span><span class="row-detail">Shivamogga</span><span class="label row-type">Luxury auto</span></li>
@@ -1032,7 +1039,6 @@ footer .wrap{ display:flex; flex-wrap:wrap; gap:6px 24px; justify-content:space-
       </blockquote>
       <figcaption class="attrib"><span class="avatar" aria-hidden="true">AK</span><span class="who"><b>Adithya Kamath</b><span>Owner, Swaradi Live</span></span></figcaption>
     </figure>
-    <div class="tcard is-pending draft-only"><b>Testimonial pending</b>Quote · Name · Role · Company</div>
   </div>
 </section>
 
@@ -1057,7 +1063,6 @@ footer .wrap{ display:flex; flex-wrap:wrap; gap:6px 24px; justify-content:space-
         <div class="video-meta"><span class="video-title">Single</span><span class="sub">Music video · <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-youtube"/></svg> YouTube<span class="sr-only"> (opens in a new tab)</span></span></div>
       </a>
     </div>
-    <p class="note draft-only">Pending: real titles for the three videos, and which film each playback video belongs to.</p>
 
     <div class="clips-panel">
       <div class="clips-head">
@@ -1288,7 +1293,7 @@ footer .wrap{ display:flex; flex-wrap:wrap; gap:6px 24px; justify-content:space-
   function startRotation(){
     stopRotation();
     void segs.offsetWidth; segs.classList.add('is-rotating');   /* restarts the progress fill */
-    timer = setInterval(function(){ select(current + 1, false); }, 4000);
+    timer = setInterval(function(){ select(current + 1, false); }, 2000);
   }
 
   /* One control for everything that moves by itself: the rotating word and the gradient */
