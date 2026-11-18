@@ -85,7 +85,7 @@ section{ padding-block:var(--section) 0; scroll-margin-top:24px; }
 }
 h1,h2,h3,dt,button,.btn,.label,.caps-link,.name,.hero-title,.rot,.rot-print,.mono-mark,.rail-mark,.nav a,
 .row-main,.video-title,.release-title,.booking-title,.channel b,.subhead,.follow,.reel,.langs b,.bands p,
-.gtitle,.gmeta,.gchip,.gsound,.sound-label,.fkicker,.fbig,.freq-cta,.b dd b,.attrib b,.avatar,.pull,.qmark,
+.gtitle,.gmeta,.gchip,.gsound,.sound-label,.fkicker,.b dd b,.attrib b,.avatar,.pull,.qmark,
 .fmt-tab,.card-rail a,.draftbar{ font-family:var(--grot); }
 .voice{ font-family:var(--body); font-weight:450; font-size:19px; line-height:1.5; }
 @media (min-width:760px){ .voice{ font-size:22px; } }
@@ -574,16 +574,17 @@ html.motion-off .card::before{ animation-play-state:paused; }
 .format:nth-child(3) h3{ font-size:clamp(60px,17vw,148px); }
 .format p{ color:var(--muted); font-size:17px; max-width:44ch; }
 @media (min-width:900px){ .format{ grid-template-columns:minmax(0,8fr) minmax(0,4fr); column-gap:40px; align-items:end; padding:28px 0; } .format p{ font-size:18px; padding-bottom:6px; } }
-.format-notes{ margin-top:32px; display:grid; gap:20px; }
+.format-notes{ margin-top:28px; padding-top:22px; border-top:1px solid var(--rule); display:grid; gap:18px; }
 .format-notes div{ display:grid; gap:6px; }
-.format-notes p{ font-family:var(--body); font-size:19px; line-height:1.4; max-width:46ch; }
-@media (min-width:760px){ .format-notes{ grid-template-columns:1fr 1fr; column-gap:56px; } }
+.format-notes p{ font-family:var(--body); font-size:17px; line-height:1.45; color:var(--muted); max-width:46ch; }
+@media (min-width:760px){ .format-notes{ grid-template-columns:1fr 1fr; column-gap:56px; margin-top:36px; } }
+@media (min-width:1100px){ .format-notes{ grid-template-columns:minmax(0,2fr) minmax(0,1fr); column-gap:14px; } .format-notes div:last-child{ padding-left:2px; } }
 
 
 .caption{ margin-top:16px; color:var(--muted); font-size:16px; }
 
 /* ---------- Formats: bento grid, halftone figures ---------- */
-.print-only.formats,.print-only.format-notes{ display:none; }
+.print-only.formats{ display:none; }
 .fgrid{ display:grid; grid-template-columns:minmax(0,1fr); gap:12px; }
 .fcard{ position:relative; display:flex; flex-direction:column; min-width:0; border-radius:22px; overflow:hidden; }
 .fkicker{ font-weight:500; font-size:14px; color:var(--muted); }
@@ -596,8 +597,6 @@ html.motion-off .card::before{ animation-play-state:paused; }
 .f-band,.f-solo,.f-acc{ background:#0C0A09; border:1px solid var(--rule); }
 .f-band .fcopy,.f-solo .fcopy,.f-acc .fcopy{ padding:18px 20px 22px; border-top:1px solid var(--rule); }
 .f-solo .fart-wrap,.f-acc .fart-wrap{ padding:10px 6px 0; }
-.f-band{ background:linear-gradient(#170C06, #0C0A09 62%); }
-.f-band .fkicker{ color:var(--signal); }
 .f-band .ftitle{ font-size:clamp(38px,9vw,58px); letter-spacing:-.035em; }
 
 /* drawing */
@@ -638,54 +637,30 @@ html.motion-off .card::before{ animation-play-state:paused; }
 .fart .mr3{ animation:fM3 var(--md) ease-in-out infinite; animation-delay:var(--mdl); }
 .fcard:not(.is-live) .fart *, html.motion-off .fart *{ animation-play-state:paused !important; }
 
-/* set length: orange card */
-.f-len{ background:var(--signal); color:var(--on-signal); padding:20px; gap:18px; justify-content:space-between; }
-.f-len .fkicker{ color:var(--on-signal); }
-.fbig{ font-weight:600; font-size:clamp(40px,10vw,52px); line-height:.95; letter-spacing:-.035em; }
-.fmini{ display:grid; gap:9px; }
-.tl{ position:relative; display:block; height:12px; border-radius:12px; background:rgba(1,1,1,.14); overflow:hidden; }
-.tl-fill{ position:absolute; inset:0; border-radius:inherit; background:var(--on-signal); transform-origin:0 50%; transform:scaleX(.4); animation:fTl 4.5s var(--ease) infinite alternate; }
-@keyframes fTl{ from{ transform:scaleX(.3); } to{ transform:scaleX(1); } }
-.tl.t2 .tl-fill{ animation-duration:3.6s; animation-delay:-1.4s; opacity:.7; }
-.tl.t3 .tl-fill{ animation-duration:5.2s; animation-delay:-2.6s; opacity:.45; }
-.fcard:not(.is-live) .tl-fill, html.motion-off .tl-fill{ animation-play-state:paused; }
-
-/* requests: light card */
-.f-req{ background:var(--ink); color:var(--stage); padding:20px; gap:16px; justify-content:space-between; }
-.f-req .fkicker{ color:#55514B; }
-.req-tags{ display:flex; flex-wrap:wrap; gap:4px 16px; font-family:var(--body); font-style:italic; font-size:17px; color:#55514B; margin-top:4px; }
-.req-tags span::before{ content:""; display:inline-block; width:6px; height:6px; margin:0 8px 2px 0; border-radius:50%; background:var(--signal); }
-.freq-cta{ align-self:flex-start; display:inline-flex; align-items:center; gap:10px; min-height:48px; padding:0 20px; border-radius:999px; background:var(--stage); color:var(--ink); text-decoration:none; font-weight:500; font-size:16px; }
-.freq-cta:hover{ background:#262626; }
-.f-req :focus-visible{ outline-color:var(--stage); }
-
 @media (min-width:760px){
-  .fgrid{ grid-template-columns:repeat(2,minmax(0,1fr)); grid-template-areas:"band band" "solo acc" "len req"; }
-  .f-band{ grid-area:band; } .f-solo{ grid-area:solo; } .f-acc{ grid-area:acc; } .f-len{ grid-area:len; } .f-req{ grid-area:req; }
+  .fgrid{ grid-template-columns:repeat(2,minmax(0,1fr)); grid-template-areas:"band band" "solo acc"; }
+  .f-band{ grid-area:band; } .f-solo{ grid-area:solo; } .f-acc{ grid-area:acc; }
 }
 @media (min-width:1100px){
-  .fgrid{ grid-template-columns:repeat(4,minmax(0,1fr)); grid-template-areas:"band band solo acc" "band band len req"; gap:14px; }
+  .fgrid{ grid-template-columns:minmax(0,2fr) minmax(0,1fr); grid-template-areas:"band solo" "band acc"; gap:14px; }
   .fcard{ border-radius:26px; }
   .f-band .fart-wrap{ flex:1; display:flex; align-items:flex-end; }
   .f-band .fcopy{ grid-template-columns:auto minmax(0,1fr); column-gap:32px; align-items:end; padding:22px 28px 28px; }
   .f-band .fkicker{ grid-column:1 / -1; }
   .f-band .ftitle{ white-space:nowrap; } .f-band .fline{ padding-bottom:6px; }
   .ftitle{ font-size:clamp(24px,2vw,28px); }
-  .f-len,.f-req{ padding:24px; }
-  .fbig{ font-size:clamp(44px,3.6vw,56px); }
-  .fmini{ flex:1; align-content:center; }
   .fline{ font-size:17px; }
   .f-band .fline{ font-size:18px; }
 }
 @media (max-width:759px){ .f-solo .fart,.f-acc .fart{ max-height:190px; margin-inline:auto; } }
 @media (prefers-reduced-motion:reduce){
-  .fart *, .tl-fill{ animation:none !important; }
-  .fart .meter circle{ opacity:.5; } .tl-fill{ transform:scaleX(.7); }
+  .fart *{ animation:none !important; }
+  .fart .meter circle{ opacity:.5; }
 }
 
 /* ---------- Booking ---------- */
-.booking{ padding-bottom:var(--section); }
-.booking-title{ font-weight:600; font-size:clamp(46px,11.2vw,138px); line-height:.9; letter-spacing:-.022em; }
+.booking{ padding-top:calc(var(--section) * 1.35); padding-bottom:var(--section); }
+.booking-title{ font-weight:600; font-size:clamp(42px,8vw,118px); line-height:.92; letter-spacing:-.022em; }
 .booking-title span{ display:block; text-wrap:balance; }
 .booking-title .bt-2{ color:var(--signal); }
 .booking-grid{ display:grid; gap:40px; margin-top:32px; }
@@ -884,12 +859,12 @@ footer .wrap{ display:flex; flex-wrap:wrap; gap:6px 24px; justify-content:space-
   .sp-row b{ font-size:12pt; } .sp-row small,.sp-go{ font-size:8.5pt; } .sp-go{ grid-column:auto; }
   .range .row{ grid-template-columns:5fr 7fr; } .range .row-detail{ font-size:11.5pt; }
   .fgrid{ display:none !important; }
-  .print-only.formats{ display:block; } .print-only.format-notes{ display:grid; }
+  .print-only.formats{ display:block; }
   .format{ grid-template-columns:8fr 4fr; column-gap:8mm; align-items:end; padding:4mm 0; }
   .format:nth-child(1) h3{ font-size:20pt; } .format:nth-child(2) h3{ font-size:34pt; } .format:nth-child(3) h3{ font-size:60pt; }
   .format p{ font-size:10pt; }
-  .format-notes{ grid-template-columns:1fr 1fr; column-gap:10mm; margin-top:6mm; } .format-notes p{ font-size:11pt; }
-  .booking{ padding-top:18mm; padding-bottom:12mm; }
+  .format-notes{ grid-template-columns:1fr 1fr; column-gap:10mm; margin-top:5mm; padding-top:3mm; } .format-notes p{ font-size:11pt; }
+  .booking{ padding-top:12mm; padding-bottom:8mm; }
   .booking-title{ font-size:60pt; }
   .enq-open,.enq{ display:none !important; }
   .booking-grid{ grid-template-columns:7fr 5fr; column-gap:10mm; margin-top:10mm; }
@@ -1346,26 +1321,13 @@ footer .wrap{ display:flex; flex-wrap:wrap; gap:6px 24px; justify-content:space-
           <p class="fline">Intimate rooms and acoustic sets.</p>
         </div>
       </article>
-      <article class="fcard f-len">
-        <p class="fkicker">Set length</p>
-        <div class="fmini" aria-hidden="true"><span class="tl"><span class="tl-fill"></span></span><span class="tl t2"><span class="tl-fill"></span></span><span class="tl t3"><span class="tl-fill"></span></span></div>
-        <div class="fcopy"><p class="fbig">Flexible.</p><p class="fline">Planned around the event.</p></div>
-      </article>
-      <article class="fcard f-req">
-        <p class="fkicker">Requests</p>
-        <div class="fcopy">
-          <p class="fline">Welcome on the night. Custom songs prepared ahead of the event, from a first dance to a brand anthem.</p>
-          <p class="req-tags" aria-hidden="true"><span>on the night</span><span>a first dance</span><span>a brand anthem</span></p>
-        </div>
-        <a class="freq-cta" href="#booking" data-enquire>Ask about a format <span aria-hidden="true">→</span></a>
-      </article>
     </div>
     <ul class="formats print-only">
       <li class="format"><h3>Solo with backing tracks</h3><p>Launches, lounges, private evenings.</p></li>
       <li class="format"><h3>With an accompanist</h3><p>Intimate rooms and acoustic sets.</p></li>
       <li class="format"><h3>Full band</h3><p>Musicians brought together for each event. Concerts, festivals, large celebrations.</p></li>
     </ul>
-    <div class="format-notes print-only">
+    <div class="format-notes">
       <div><h3 class="label">Set length</h3><p>Flexible, planned around the event.</p></div>
       <div><h3 class="label">Requests</h3><p>Welcome on the night. Custom songs prepared ahead of the event, from a first dance to a brand anthem.</p></div>
     </div>
