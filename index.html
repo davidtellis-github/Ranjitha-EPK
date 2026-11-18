@@ -1,12 +1,10 @@
 <!doctype html>
 <!--
   Ranjitha Yellur · EPK
-  Draft switch: data-draft="true" shows pending items (photo slots, empty testimonial slots, notes).
-  Set data-draft="false" on the <html> tag before publishing.
-  Hero portrait: photos/ranjitha-portrait.webp is the supplied portrait with its background removed, so it sits on the orange panel.
-  The untouched original is photos/ranjitha-portrait-original.webp.
+  Draft switch: set data-draft="true" on the <html> tag to show pending notes while editing.
+  Hero photo: photos/ranjitha-stage.webp, a live stage shot, fills the left panel.
 -->
-<html lang="en-GB" data-draft="true">
+<html lang="en-GB" data-draft="false">
 <head>
 <meta charset="utf-8">
 <script>if(/[?&]draft=0/.test(location.search))document.documentElement.setAttribute("data-draft","false");</script>
@@ -155,15 +153,20 @@ html.motion-off .card::before{ animation-play-state:paused; }
 }
 @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){ .card-body{ background:rgba(14,11,9,.82); } }
 .card-photo{
-  position:relative; overflow:hidden; color:var(--on-signal);
+  position:relative; overflow:hidden; color:var(--ink);
   background:linear-gradient(135deg, var(--signal-light) 0%, var(--signal) 36%, #D94300 74%, var(--signal-deep) 100%);
   height:clamp(360px, calc(100svh - 222px - var(--draftbar)), 700px);
 }
 .stipple{ position:absolute; inset:0; width:100%; height:100%; display:block; image-rendering:pixelated; }
-.card-photo :focus-visible{ outline-color:var(--on-signal); }
+.card-photo :focus-visible{ outline-color:var(--ink); }
+/* scrims keep the name and rail readable over the photo */
+.card-photo::after{
+  content:""; position:absolute; inset:0; z-index:1; pointer-events:none;
+  background:linear-gradient(to bottom, rgba(10,3,0,.62) 0%, rgba(10,3,0,0) 30%);
+}
 .portrait{
-  position:absolute; left:0; top:10%; width:100%; height:calc(90% + 24px); max-width:none;
-  object-fit:cover; object-position:50% 0;
+  position:absolute; left:0; top:0; width:100%; height:calc(100% + 24px); max-width:none;
+  object-fit:cover; object-position:85% 22%;
   transform:translateY(var(--py,0px));
   animation:rise .7s var(--ease) both;
 }
@@ -171,7 +174,7 @@ html.motion-off .card::before{ animation-play-state:paused; }
 .card-rail{ display:none; }
 .card-title{ position:absolute; left:16px; top:14px; right:16px; z-index:2; }
 .name{ font-weight:600; font-size:clamp(36px,10.6vw,46px); line-height:.9; letter-spacing:-.015em; }
-.card-title .label{ color:var(--on-signal); margin-top:6px; font-size:12px; }
+.card-title .label{ color:rgba(240,238,234,.82); margin-top:6px; font-size:12px; }
 
 .card-body{ display:grid; grid-template-columns:minmax(0,1fr); align-content:start; padding:20px 16px 20px; }
 .caps-link{
@@ -222,11 +225,12 @@ html.motion-off .card::before{ animation-play-state:paused; }
   .hero{ padding:10px 10px 0; }
   .card{ grid-template-columns:minmax(0, min(58%, calc(86svh + 136px))) minmax(0,1fr); border-radius:24px; height:calc(100svh - 20px - var(--draftbar)); min-height:620px; }
   .card-photo{ height:auto; }
-  .portrait{ left:136px; top:3%; width:calc(100% - 136px); height:calc(97% + 24px); }
+  .portrait{ left:0; top:0; width:100%; height:calc(100% + 24px); object-position:58% 24%; }
+  .card-photo::after{ background:linear-gradient(to right, rgba(10,3,0,.66) 0, rgba(10,3,0,.38) 136px, rgba(10,3,0,0) 300px), linear-gradient(to bottom, rgba(10,3,0,.5) 0%, rgba(10,3,0,0) 26%); }
   .card-rail{
     position:absolute; left:0; top:0; bottom:0; width:136px; z-index:2;
     display:flex; flex-direction:column; justify-content:space-between;
-    padding:26px 12px 26px 28px; border-right:1px solid rgba(1,1,1,.45);
+    padding:26px 12px 26px 28px; border-right:1px solid rgba(240,238,234,.16);
   }
   .rail-mark{ font-weight:600; font-size:26px; letter-spacing:-.02em; text-decoration:none; font-style:italic; display:inline-block; }
   .card-rail ul{ display:grid; gap:2px; }
@@ -804,7 +808,7 @@ footer .wrap{ display:flex; flex-wrap:wrap; gap:6px 24px; justify-content:space-
   .card{ grid-template-columns:58fr 42fr; height:auto; min-height:128mm; border-radius:5mm; }
   .card::before{ display:none; } .card-body{ background:var(--wing); -webkit-backdrop-filter:none; backdrop-filter:none; box-shadow:none; }
   .card-photo{ height:auto; }
-  .portrait{ animation:none; left:0; top:4%; width:100%; height:96%; transform:none; }
+  .portrait{ animation:none; left:0; top:0; width:100%; height:100%; transform:none; }
   .card-rail,.card-foot .btn{ display:none !important; }
   .card-title{ left:7mm; top:7mm; }
   .name{ font-size:30pt; } .card-title .label{ font-size:7.5pt; }
@@ -889,7 +893,6 @@ footer .wrap{ display:flex; flex-wrap:wrap; gap:6px 24px; justify-content:space-
 </svg>
 <a class="skip" href="#main">Skip to content</a>
 
-<p class="draftbar draft-only">Draft · pending items are shown</p>
 
 <header class="topbar">
   <div class="wrap">
@@ -913,8 +916,7 @@ footer .wrap{ display:flex; flex-wrap:wrap; gap:6px 24px; justify-content:space-
     <div class="card">
 
       <div class="card-photo">
-        <canvas class="stipple" aria-hidden="true"></canvas>
-        <img class="portrait" src="photos/ranjitha-portrait.webp" alt="Portrait of Ranjitha Yellur" width="1100" height="1509" fetchpriority="high">
+        <img class="portrait" src="photos/ranjitha-stage.webp" alt="Ranjitha Yellur singing on stage under warm orange light, one arm raised" width="1024" height="1536" fetchpriority="high">
         <div class="card-rail">
           <div>
             <a class="rail-mark" href="#top" aria-label="Ranjitha Yellur, top of page">RY</a>
@@ -1648,6 +1650,7 @@ document.querySelectorAll('.track-media[data-yt]').forEach(function(a){
   /* ---------- Stipple gradient: a slow-folding orange gradient dithered into fine dots ---------- */
   var stipple = (function(){
     var canvas = document.querySelector('.stipple');
+    if (!canvas) return { sync:function(){} };   /* the hero is a photo now */
     var panel = canvas.parentNode;
     var rail = document.querySelector('.card-rail');
     var DOT = 1.5;                       /* size of one stipple dot, in CSS pixels */
