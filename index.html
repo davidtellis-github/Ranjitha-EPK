@@ -40,7 +40,7 @@
 
   --r:6px;
   --gutter:16px;
-  --max:1240px;
+  --max:1560px;
   --section:88px;
   --grot:"Clash Grotesk","Arial Narrow",system-ui,sans-serif;
   --body:"Urbanist",system-ui,-apple-system,"Segoe UI",sans-serif;
@@ -510,15 +510,52 @@ html.motion-off .card::before{ animation-play-state:paused; }
 .profile{ margin-top:24px; font-size:17px; color:var(--muted); }
 .note{ margin-top:14px; font-size:14px; color:var(--muted); border-left:2px dashed var(--rule-strong); padding-left:12px; max-width:60ch; }
 
-/* ---------- Releases ---------- */
-.release{ display:grid; gap:6px; padding:20px 0; border-bottom:1px solid var(--rule); }
-.release-title{ font-weight:600; font-size:clamp(26px,6.4vw,40px); line-height:1.02; letter-spacing:-.02em; }
-.release-meta{ color:var(--muted); font-size:16px; line-height:1.35; }
-.release-meta em{ font-family:var(--body); font-size:1.08em; color:var(--ink); }
-.release a{ justify-self:start; margin-top:6px; min-height:44px; display:inline-flex; align-items:center; white-space:nowrap; }
-@media (min-width:900px){
-  .release{ grid-template-columns:minmax(0,5fr) minmax(0,5fr) minmax(0,2fr); column-gap:24px; align-items:baseline; padding:26px 0; }
-  .release a{ justify-self:end; margin-top:0; }
+/* ---------- Playback and releases ---------- */
+.tracks{ border-top:1px solid var(--rule); }
+.track{ display:grid; gap:18px; padding:28px 0 32px; border-bottom:1px solid var(--rule); }
+.track-media{ position:relative; display:block; aspect-ratio:16/9; border-radius:var(--r); overflow:hidden; background:var(--riser); }
+.track-media img{ width:100%; height:100%; object-fit:cover; transition:transform .6s var(--ease), filter .3s; filter:saturate(.92); }
+.track-media:hover img{ transform:scale(1.025); filter:none; }
+.track-media.lb img{ scale:1.34; } /* this video's thumbnail is letterboxed */
+.track-media .play{ left:16px; bottom:16px; width:52px; height:52px; transition:background-color .2s; }
+.track-media:hover .play{ background:var(--signal); }
+.track-media iframe{ position:absolute; inset:0; width:100%; height:100%; border:0; }
+.track-copy{ display:grid; align-content:start; gap:10px; }
+.track-kicker{ font-family:var(--grot); font-weight:500; font-size:14px; color:var(--signal); }
+.track-title{ font-family:var(--grot); font-weight:600; font-size:clamp(30px,5.6vw,56px); line-height:.98; letter-spacing:-.022em; }
+.track-desc{ color:var(--muted); font-size:17px; line-height:1.45; max-width:38ch; }
+.track-desc em{ color:var(--ink); font-style:italic; }
+.track-cta{ display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; }
+.track-cta .btn{ min-height:46px; padding:0 18px; font-size:15.5px; }
+.track-cta .btn .ico{ width:1.15em; height:1.15em; }
+.btn-spotify{ background:var(--ink); color:var(--stage); }
+.btn-spotify .ico{ color:#1DB954; }
+.btn-spotify:hover{ background:#FFFFFF; }
+@media (min-width:760px){
+  .track{ grid-template-columns:minmax(0,6fr) minmax(0,6fr); column-gap:clamp(28px,4vw,72px); align-items:center; padding:36px 0; }
+}
+@media (min-width:1100px){
+  .track{ grid-template-columns:minmax(0,5fr) minmax(0,7fr); }
+  .more-sp{ grid-template-columns:minmax(0,5fr) minmax(0,7fr) !important; }
+  .track-desc{ font-size:18px; }
+}
+
+.more-sp{ margin-top:40px; }
+.more-sp .label{ margin-bottom:6px; }
+.sp-row{ display:grid; grid-template-columns:64px minmax(0,1fr); align-items:center; gap:16px; padding:14px 0; border-bottom:1px solid var(--rule); text-decoration:none; }
+.sp-row img{ width:64px; height:64px; border-radius:4px; background:var(--riser); }
+.sp-row b{ display:block; font-family:var(--grot); font-weight:500; font-size:22px; line-height:1.15; }
+.sp-row small{ display:block; margin-top:2px; color:var(--muted); font-size:15px; }
+.sp-go{ grid-column:2; display:inline-flex; align-items:center; gap:6px; font-size:15px; font-weight:500; white-space:nowrap; }
+.sp-go .ico{ color:#1DB954; width:1.1em; height:1.1em; }
+.sp-row:hover b{ text-decoration:underline; text-decoration-color:var(--rule-strong); }
+@media (min-width:760px){
+  .more-sp{ display:grid; grid-template-columns:minmax(0,7fr) minmax(0,5fr); column-gap:clamp(28px,4vw,72px); margin-top:56px; }
+  .more-sp .label{ padding-top:20px; }
+  .sp-row{ grid-template-columns:64px minmax(0,1fr) auto; }
+  .sp-go{ grid-column:auto; }
+  .more-sp ul{ grid-column:2; grid-row:1; }
+  .more-sp ul{ border-top:1px solid var(--rule); }
 }
 
 /* ---------- Range ---------- */
@@ -648,12 +685,101 @@ html.motion-off .card::before{ animation-play-state:paused; }
 
 /* ---------- Booking ---------- */
 .booking{ padding-bottom:var(--section); }
-.booking-title{ font-weight:600; font-size:clamp(60px,19vw,200px); line-height:.86; letter-spacing:-.022em; }
+.booking-title{ font-weight:600; font-size:clamp(46px,11.2vw,138px); line-height:.9; letter-spacing:-.022em; }
+.booking-title span{ display:block; text-wrap:balance; }
+.booking-title .bt-2{ color:var(--signal); }
 .booking-grid{ display:grid; gap:40px; margin-top:32px; }
 .booking-copy{ max-width:40ch; }
-.send{ margin-top:28px; }
-.send ul{ margin-top:12px; border-top:1px solid var(--rule); }
-.send li{ padding:12px 0; border-bottom:1px solid var(--rule); font-size:17px; }
+
+/* Form trigger: the one light surface in this section */
+.enq-open{
+  position:relative; display:grid; gap:4px; width:100%; max-width:520px; margin-top:32px;
+  padding:20px 64px 22px 22px; text-align:left;
+  background:var(--ink); color:var(--stage); border-radius:var(--r);
+  transition:background-color .18s;
+}
+.enq-open .label{ color:#5E5A54; }
+.enq-open-t{ font-family:var(--grot); font-weight:600; font-size:clamp(28px,6vw,40px); line-height:1; letter-spacing:-.02em; margin-top:6px; }
+.enq-open-s{ font-size:16px; color:#3A3733; }
+.enq-open-arrow{ position:absolute; right:22px; bottom:20px; font-family:var(--grot); font-size:32px; line-height:1; transition:transform .25s var(--ease); }
+.enq-open:hover{ background:#FFFFFF; }
+.enq-open:hover .enq-open-arrow{ transform:translateX(5px); }
+.enq-open:focus-visible{ outline-color:var(--signal); }
+
+/* ---------- Enquiry modal: kept quiet on purpose ---------- */
+html:has(.enq[open]){ overflow:hidden; }
+.enq{
+  padding:0; border:0; color:var(--ink); background:var(--wing);
+  width:100%; max-width:100%; height:100%; max-height:100%; margin:0;
+}
+.enq::backdrop{ background:rgba(1,1,1,.72); }
+.enq[open]{ animation:enqIn .22s ease-out; }
+@keyframes enqIn{ from{ opacity:0; } to{ opacity:1; } }
+.enq-form{ display:flex; flex-direction:column; height:100%; }
+.enq-form[hidden]{ display:none; }
+.enq-head{ display:flex; align-items:center; justify-content:space-between; gap:16px; padding:18px var(--gutter) 4px; }
+.enq-title{ font-family:var(--grot); font-weight:500; font-size:26px; line-height:1.1; letter-spacing:-.015em; }
+.enq-close{ width:44px; height:44px; margin-right:-12px; display:grid; place-items:center; border-radius:50%; color:var(--muted); }
+.enq-close:hover{ color:var(--ink); }
+.enq-close svg{ width:16px; height:16px; stroke:currentColor; stroke-width:1.5; fill:none; }
+.enq-body{ flex:1; overflow-y:auto; overscroll-behavior:contain; padding:0 var(--gutter) 24px; }
+.enq-grid{ display:grid; gap:0 24px; }
+@media (min-width:640px){ .enq-grid{ grid-template-columns:1fr 1fr; } .fld.wide{ grid-column:1 / -1; } }
+
+.fld{ display:grid; padding-top:18px; min-width:0; }
+.fld > label, .fld-l{ font-size:14px; color:var(--muted); }
+.fld input, .fld select, .fld textarea{
+  width:100%; min-height:44px; padding:8px 0;
+  font:inherit; font-size:17px; color:var(--ink); background:transparent;
+  border:0; border-bottom:1px solid var(--rule-strong); border-radius:0;
+  transition:border-color .15s;
+}
+.fld textarea{ min-height:64px; resize:vertical; line-height:1.4; }
+.fld input:focus, .fld select:focus, .fld textarea:focus{ outline:none; border-bottom-color:var(--ink); }
+.fld select{
+  -webkit-appearance:none; appearance:none; padding-right:24px; cursor:pointer;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23A6A29B' stroke-width='1.4'/%3E%3C/svg%3E") right 2px center no-repeat;
+}
+.fld select option{ background:var(--wing); color:var(--ink); }
+.fld select:has(option[value=""]:checked){ color:var(--muted); }
+.fld input[type=date]{ color-scheme:dark; }
+.fld input[type=date]::-webkit-calendar-picker-indicator{ opacity:.5; cursor:pointer; }
+.fld [aria-invalid=true]{ border-bottom-color:#FF8C42; }
+.ferr{ margin-top:6px; font-size:14px; color:#FF8C42; }
+.ferr[hidden]{ display:none; }
+
+fieldset.fld{ border:0; margin:0; padding-inline:0; padding-bottom:0; }
+fieldset.fld legend{ padding:0; float:left; width:100%; }
+
+/* Format: one plain segmented line */
+.fseg{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); margin-top:10px; border:1px solid var(--rule-strong); border-radius:var(--r); overflow:hidden; }
+.fseg label{ position:relative; }
+.fseg label + label{ border-left:1px solid var(--rule-strong); }
+.fseg input{ position:absolute; inset:0; opacity:0; margin:0; cursor:pointer; }
+.fseg span{ display:grid; place-items:center; min-height:44px; padding:0 6px; font-size:15px; color:var(--muted); text-align:center; transition:background-color .15s, color .15s; }
+.fseg input:hover + span{ color:var(--ink); }
+.fseg input:checked + span{ background:var(--ink); color:var(--stage); }
+.fseg input:focus-visible + span{ outline:2px solid var(--ink); outline-offset:-4px; }
+
+.enq-foot{ display:grid; grid-template-columns:1fr 1fr; gap:8px; padding:12px var(--gutter) calc(12px + env(safe-area-inset-bottom)); }
+.enq-foot .btn{ min-height:48px; padding:0 12px; font-size:16px; }
+.enq-foot .ico{ width:1.1em; height:1.1em; }
+
+.enq-done{ flex:1; display:grid; align-content:center; justify-items:start; gap:10px; padding:40px var(--gutter); }
+.enq-done[hidden]{ display:none; }
+.enq-done p{ color:var(--muted); max-width:34ch; }
+.enq-done .btn{ margin-top:14px; }
+
+@media (min-width:760px){
+  .enq{ width:min(620px, calc(100% - 64px)); height:fit-content; max-height:calc(100% - 64px); margin:auto; border-radius:10px; }
+  .enq-form{ max-height:calc(100vh - 64px); }
+  .enq-head{ padding:26px 32px 4px; }
+  .enq-body{ padding:0 32px 28px; }
+  .enq-foot{ display:flex; justify-content:flex-end; padding:0 32px 28px; }
+  .enq-foot .btn{ padding:0 18px; }
+  .enq-done{ padding:56px 32px; }
+}
+@media (prefers-reduced-motion:reduce){ .enq[open]{ animation:none; } .enq-open-arrow{ transition:none; } }
 .channels{ display:grid; gap:12px; align-content:start; }
 .channel{ display:grid; gap:2px; padding:16px 18px; border:1px solid var(--rule-strong); border-radius:var(--r); text-decoration:none; min-height:72px; align-content:center; }
 .channel:hover{ border-color:var(--ink); }
@@ -748,8 +874,14 @@ footer .wrap{ display:flex; flex-wrap:wrap; gap:6px 24px; justify-content:space-
   .reels,.reels.print-only{ display:grid; grid-template-columns:repeat(5,1fr); gap:3mm; border-top:0; }
   .reel{ flex-direction:column; align-items:flex-start; min-height:0; padding:3mm; border:1px solid var(--rule-strong); border-radius:var(--r); font-size:11pt; }
   .reel span{ font-size:8.5pt; }
-  .release{ grid-template-columns:4fr 5fr 3fr; column-gap:6mm; padding:4mm 0; align-items:baseline; }
-  .release-title{ font-size:18pt; } .release-meta{ font-size:9.5pt; } .release a{ justify-self:end; margin:0; min-height:0; }
+  .track{ grid-template-columns:5fr 7fr; column-gap:7mm; padding:4mm 0; align-items:center; break-inside:avoid; }
+  .track-title{ font-size:18pt; } .track-desc{ font-size:9.5pt; } .track-kicker{ font-size:8.5pt; }
+  .track-cta{ margin-top:1mm; } .track-cta .btn{ min-height:0; padding:1.6mm 3mm; font-size:8.5pt; }
+  .track-media .play{ width:8mm; height:8mm; left:3mm; bottom:3mm; }
+  .more-sp{ display:grid; grid-template-columns:5fr 7fr; column-gap:7mm; margin-top:5mm; break-inside:avoid; }
+  .more-sp ul{ grid-column:2; grid-row:1; }
+  .sp-row{ grid-template-columns:11mm 1fr auto; gap:4mm; padding:2.5mm 0; } .sp-row img{ width:11mm; height:11mm; }
+  .sp-row b{ font-size:12pt; } .sp-row small,.sp-go{ font-size:8.5pt; } .sp-go{ grid-column:auto; }
   .range .row{ grid-template-columns:5fr 7fr; } .range .row-detail{ font-size:11.5pt; }
   .fgrid{ display:none !important; }
   .print-only.formats{ display:block; } .print-only.format-notes{ display:grid; }
@@ -758,7 +890,8 @@ footer .wrap{ display:flex; flex-wrap:wrap; gap:6px 24px; justify-content:space-
   .format p{ font-size:10pt; }
   .format-notes{ grid-template-columns:1fr 1fr; column-gap:10mm; margin-top:6mm; } .format-notes p{ font-size:11pt; }
   .booking{ padding-top:18mm; padding-bottom:12mm; }
-  .booking-title{ font-size:96pt; }
+  .booking-title{ font-size:60pt; }
+  .enq-open,.enq{ display:none !important; }
   .booking-grid{ grid-template-columns:7fr 5fr; column-gap:10mm; margin-top:10mm; }
   .send li{ font-size:10.5pt; padding:2.5mm 0; }
   .channel{ min-height:0; padding:4mm; } .channel b{ font-size:14pt; }
@@ -788,12 +921,12 @@ footer .wrap{ display:flex; flex-wrap:wrap; gap:6px 24px; justify-content:space-
     <a class="mono-mark" href="#top" aria-label="Ranjitha Yellur, back to top">RY</a>
     <nav class="nav" aria-label="Sections">
       <a href="#stages">Stages</a>
-      <a href="#watch">Watch</a>
       <a href="#releases">Releases</a>
+      <a href="#watch">Watch</a>
       <a href="#range">Range</a>
       <a href="#formats">Formats</a>
     </nav>
-    <a class="btn btn-ghost btn-small" href="#booking">Check availability</a>
+    <a class="btn btn-ghost btn-small" href="#booking" data-enquire>Check availability</a>
   </div>
 </header>
 
@@ -814,8 +947,8 @@ footer .wrap{ display:flex; flex-wrap:wrap; gap:6px 24px; justify-content:space-
               <ul>
                 <li><a href="#about">About</a></li>
                 <li><a href="#stages">Stages</a></li>
-                <li><a href="#watch">Watch</a></li>
                 <li><a href="#releases">Releases</a></li>
+                <li><a href="#watch">Watch</a></li>
                 <li><a href="#range">Range</a></li>
                 <li><a href="#booking">Booking</a></li>
               </ul>
@@ -862,7 +995,7 @@ footer .wrap{ display:flex; flex-wrap:wrap; gap:6px 24px; justify-content:space-
 
         <div class="card-foot">
           <p class="lede">A versatile vocalist for brand evenings, weddings, festivals and concert stages. Bollywood, Western pop, Indian folk and Carnatic, in the same set if the night calls for it.</p>
-          <a class="btn btn-primary" href="#booking">Check availability</a>
+          <a class="btn btn-primary" href="#booking" data-enquire>Check availability</a>
         </div>
       </div>
 
@@ -1042,28 +1175,76 @@ footer .wrap{ display:flex; flex-wrap:wrap; gap:6px 24px; justify-content:space-
   </div>
 </section>
 
+<!-- ================= Playback and releases ================= -->
+<!-- Videos: titles from each video's public YouTube title. Jagava Hadedha Magalu and Thelike Nalike are on both YouTube and Spotify. -->
+<section id="releases" aria-labelledby="releases-h">
+  <div class="wrap">
+    <div class="head">
+      <h2 class="h2" id="releases-h">Playback and releases</h2>
+      <p class="voice intro">Film playback in Kannada and Tulu, plus independent songs.</p>
+    </div>
+    <ol class="tracks">
+      <li class="track">
+        <a class="track-media" href="https://youtu.be/okiewB_8xi8" target="_blank" rel="noopener" data-yt="okiewB_8xi8" aria-label="Play the Jagava Hadedha Magalu video">
+          <img src="https://i.ytimg.com/vi/okiewB_8xi8/maxresdefault.jpg" alt="" loading="lazy" width="1280" height="720"><span class="play" aria-hidden="true"></span>
+        </a>
+        <div class="track-copy">
+          <p class="track-kicker">Kannada film playback · 2023</p>
+          <h3 class="track-title">Jagava Hadedha Magalu</h3>
+          <p class="track-desc">From the soundtrack of <em>Juliet 2</em>. Credited with Sukeerth Shetty.</p>
+          <div class="track-cta"><a class="btn btn-spotify" href="https://open.spotify.com/track/28fBpP2rgp6ACYtd7WhIvg" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-spotify"/></svg> Listen on Spotify<span class="sr-only"> (opens in a new tab)</span></a><a class="btn btn-ghost" href="https://youtu.be/okiewB_8xi8" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-youtube"/></svg> Watch on YouTube<span class="sr-only"> (opens in a new tab)</span></a></div>
+        </div>
+      </li>
+      <li class="track">
+        <a class="track-media" href="https://youtu.be/LxwwC57CWH8" target="_blank" rel="noopener" data-yt="LxwwC57CWH8" aria-label="Play the Thelike Nalike video">
+          <img src="https://i.ytimg.com/vi/LxwwC57CWH8/maxresdefault.jpg" alt="" loading="lazy" width="1280" height="720"><span class="play" aria-hidden="true"></span>
+        </a>
+        <div class="track-copy">
+          <p class="track-kicker">Tulu film playback · 2026</p>
+          <h3 class="track-title">Thelike Nalike</h3>
+          <p class="track-desc">From the Tulu film <em>Tthudar</em>. Credited with Patson Pereira and Prakash Mahadevan.</p>
+          <div class="track-cta"><a class="btn btn-spotify" href="https://open.spotify.com/track/0CbaxBB02HL4kul2ErNIfQ" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-spotify"/></svg> Listen on Spotify<span class="sr-only"> (opens in a new tab)</span></a><a class="btn btn-ghost" href="https://youtu.be/LxwwC57CWH8" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-youtube"/></svg> Watch on YouTube<span class="sr-only"> (opens in a new tab)</span></a></div>
+        </div>
+      </li>
+      <li class="track">
+        <a class="track-media" href="https://youtu.be/sI-6NPb4K5E" target="_blank" rel="noopener" data-yt="sI-6NPb4K5E" aria-label="Play the Denna Dennana video">
+          <img src="https://i.ytimg.com/vi/sI-6NPb4K5E/maxresdefault.jpg" alt="" loading="lazy" width="1280" height="720"><span class="play" aria-hidden="true"></span>
+        </a>
+        <div class="track-copy">
+          <p class="track-kicker">Tulu film playback</p>
+          <h3 class="track-title">Denna Dennana</h3>
+          <p class="track-desc">From the Tulu film <em>Tthudar</em>. Credited with Saish B and Vikas S.</p>
+          <div class="track-cta"><a class="btn btn-ghost" href="https://youtu.be/sI-6NPb4K5E" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-youtube"/></svg> Watch on YouTube<span class="sr-only"> (opens in a new tab)</span></a></div>
+        </div>
+      </li>
+      <li class="track">
+        <a class="track-media lb" href="https://youtu.be/-wGdHje3aq0" target="_blank" rel="noopener" data-yt="-wGdHje3aq0" aria-label="Play the Ee Payana video">
+          <img src="https://i.ytimg.com/vi/-wGdHje3aq0/maxresdefault.jpg" alt="" loading="lazy" width="1280" height="720"><span class="play" aria-hidden="true"></span>
+        </a>
+        <div class="track-copy">
+          <p class="track-kicker">Kannada original song</p>
+          <h3 class="track-title">Ee Payana</h3>
+          <p class="track-desc">By Cinol Veigas, featuring Ranjitha Yellur and Shilpa Kamath.</p>
+          <div class="track-cta"><a class="btn btn-ghost" href="https://youtu.be/-wGdHje3aq0" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-youtube"/></svg> Watch on YouTube<span class="sr-only"> (opens in a new tab)</span></a></div>
+        </div>
+      </li>
+    </ol>
+    <div class="more-sp">
+      <h3 class="label">Also on Spotify</h3>
+      <ul>
+        <li><a class="sp-row" href="https://open.spotify.com/track/5c67FvlkSg8LdX1asdzxR2" target="_blank" rel="noopener"><img src="https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e02d45f189ba4be7305f048945c" alt="" loading="lazy" width="64" height="64"><span><b>By2Love</b><small>Independent single · 2023</small></span><span class="sp-go"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-spotify"/></svg> Listen on Spotify<span class="sr-only"> (opens in a new tab)</span></span></a></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
 <!-- ================= Watch ================= -->
 <section id="watch" aria-labelledby="watch-h">
   <div class="wrap">
     <div class="head">
       <h2 class="h2" id="watch-h">Watch</h2>
-      <p class="voice intro">Film songs, a single and clips from live shows.</p>
+      <p class="voice intro">Clips from live shows.</p>
     </div>
-    <div class="videos">
-      <a class="video" href="https://youtu.be/okiewB_8xi8" target="_blank" rel="noopener">
-        <div class="thumb"><img src="https://i.ytimg.com/vi/okiewB_8xi8/hqdefault.jpg" alt="" loading="lazy" width="480" height="360"><span class="play" aria-hidden="true"></span></div>
-        <div class="video-meta"><span class="video-title">Film song 1</span><span class="sub">Film playback · <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-youtube"/></svg> YouTube<span class="sr-only"> (opens in a new tab)</span></span></div>
-      </a>
-      <a class="video" href="https://youtu.be/sI-6NPb4K5E" target="_blank" rel="noopener">
-        <div class="thumb"><img src="https://i.ytimg.com/vi/sI-6NPb4K5E/hqdefault.jpg" alt="" loading="lazy" width="480" height="360"><span class="play" aria-hidden="true"></span></div>
-        <div class="video-meta"><span class="video-title">Film song 2</span><span class="sub">Film playback · <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-youtube"/></svg> YouTube<span class="sr-only"> (opens in a new tab)</span></span></div>
-      </a>
-      <a class="video" href="https://youtu.be/-wGdHje3aq0" target="_blank" rel="noopener">
-        <div class="thumb"><img src="https://i.ytimg.com/vi/-wGdHje3aq0/hqdefault.jpg" alt="" loading="lazy" width="480" height="360"><span class="play" aria-hidden="true"></span></div>
-        <div class="video-meta"><span class="video-title">Single</span><span class="sub">Music video · <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-youtube"/></svg> YouTube<span class="sr-only"> (opens in a new tab)</span></span></div>
-      </a>
-    </div>
-
     <div class="clips-panel">
       <div class="clips-head">
         <div class="clips-title">
@@ -1114,34 +1295,6 @@ footer .wrap{ display:flex; flex-wrap:wrap; gap:6px 24px; justify-content:space-
       <a class="reel ext" href="https://www.instagram.com/reel/DWtnv0vkw4o/" target="_blank" rel="noopener">Live clip 4 <span><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-instagram"/></svg> Opens in Instagram</span></a>
       <a class="reel ext" href="https://www.instagram.com/reel/DHInIwQMgcK/" target="_blank" rel="noopener">Live clip 5 <span><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-instagram"/></svg> Opens in Instagram</span></a>
     </div>
-    <p class="note draft-only">Pending: what each reel shows (event, song).</p>
-  </div>
-</section>
-
-<!-- ================= Releases ================= -->
-<section id="releases" aria-labelledby="releases-h">
-  <div class="wrap">
-    <div class="head">
-      <h2 class="h2" id="releases-h">Playback and releases</h2>
-      <p class="voice intro">Film playback in Kannada and Tulu, plus independent singles.</p>
-    </div>
-    <ul class="rows">
-      <li class="release">
-        <h3 class="release-title">Jagava Hadedha Magalu</h3>
-        <p class="release-meta"><em>Juliet 2</em> (Original Motion Picture Soundtrack)<br>Kannada film playback · Credited with Sukeerth Shetty · Released 3 Feb 2023</p>
-        <a class="textlink ext" href="https://open.spotify.com/track/28fBpP2rgp6ACYtd7WhIvg" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-spotify"/></svg> Listen on Spotify</a>
-      </li>
-      <li class="release">
-        <h3 class="release-title">Thelike Nalike</h3>
-        <p class="release-meta"><em>Tthudar</em><br>Tulu film playback · Credited with Patson Pereira, Prakash Mahadevan · Released 10 Jul 2026</p>
-        <a class="textlink ext" href="https://open.spotify.com/track/0CbaxBB02HL4kul2ErNIfQ" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-spotify"/></svg> Listen on Spotify</a>
-      </li>
-      <li class="release">
-        <h3 class="release-title">By2Love</h3>
-        <p class="release-meta">Single<br>Independent single · Credited with Dolwin Kolalagiri, Prashanth Kankanady · Released 18 Sep 2023</p>
-        <a class="textlink ext" href="https://open.spotify.com/track/5c67FvlkSg8LdX1asdzxR2" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-spotify"/></svg> Listen on Spotify</a>
-      </li>
-    </ul>
   </div>
 </section>
 
@@ -1204,7 +1357,7 @@ footer .wrap{ display:flex; flex-wrap:wrap; gap:6px 24px; justify-content:space-
           <p class="fline">Welcome on the night. Custom songs prepared ahead of the event, from a first dance to a brand anthem.</p>
           <p class="req-tags" aria-hidden="true"><span>on the night</span><span>a first dance</span><span>a brand anthem</span></p>
         </div>
-        <a class="freq-cta" href="#booking">Ask about a format <span aria-hidden="true">→</span></a>
+        <a class="freq-cta" href="#booking" data-enquire>Ask about a format <span aria-hidden="true">→</span></a>
       </article>
     </div>
     <ul class="formats print-only">
@@ -1222,19 +1375,16 @@ footer .wrap{ display:flex; flex-wrap:wrap; gap:6px 24px; justify-content:space-
 <!-- ================= Booking ================= -->
 <section id="booking" class="booking" aria-labelledby="booking-h">
   <div class="wrap">
-    <h2 class="booking-title" id="booking-h">Let's make it sing.</h2>
+    <h2 class="booking-title" id="booking-h"><span>Have a Stage in Mind?</span> <span class="bt-2">Let's Talk.</span></h2>
     <div class="booking-grid">
       <div>
         <p class="voice booking-copy">Available across India and internationally. Pricing on request, quoted per event on format, set length and location.</p>
-        <div class="send">
-          <h3 class="label">To quote quickly, send</h3>
-          <ul>
-            <li>Event date and city</li>
-            <li>Type of event and expected audience</li>
-            <li>Preferred format (solo, accompanist or full band)</li>
-            <li>Set length and any song requests</li>
-          </ul>
-        </div>
+        <button type="button" class="enq-open" data-enquire aria-haspopup="dialog">
+          <span class="label">Booking form</span>
+          <span class="enq-open-t">Request a quote</span>
+          <span class="enq-open-s">Date, city, format and set. Takes about a minute.</span>
+          <span class="enq-open-arrow" aria-hidden="true">→</span>
+        </button>
       </div>
       <div class="channels">
         <a class="channel primary" href="https://wa.me/917892114422?text=Hi%20Ranjitha%2C%20I%27d%20like%20to%20check%20your%20availability%20for%20an%20event." target="_blank" rel="noopener"><span class="label"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-whatsapp"/></svg> Phone / WhatsApp</span><b>+91 78921 14422</b><span class="sr-only"> (opens a chat in WhatsApp)</span></a>
@@ -1258,6 +1408,199 @@ footer .wrap{ display:flex; flex-wrap:wrap; gap:6px 24px; justify-content:space-
   <a class="btn btn-primary" href="https://wa.me/917892114422?text=Hi%20Ranjitha%2C%20I%27d%20like%20to%20check%20your%20availability%20for%20an%20event." target="_blank" rel="noopener"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-whatsapp"/></svg> WhatsApp</a>
   <a class="btn btn-ghost" href="mailto:askyellur@gmail.com?subject=Booking%20enquiry&amp;body=Hi%20Ranjitha%2C%0D%0A%0D%0AI%27d%20like%20to%20check%20your%20availability%20for%20an%20event.%0D%0A%0D%0AEvent%20date%20and%20city%3A%0D%0AType%20of%20event%20and%20expected%20audience%3A%0D%0APreferred%20format%20%28solo%2C%20accompanist%20or%20full%20band%29%3A%0D%0ASet%20length%20and%20any%20song%20requests%3A%0D%0A%0D%0AThanks%2C%0D%0A"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg> Email</a>
 </div>
+
+<dialog class="enq" id="enquiry" aria-labelledby="enq-h">
+  <form class="enq-form" novalidate>
+    <div class="enq-head">
+      <h2 class="enq-title" id="enq-h">Booking enquiry</h2>
+      <button type="button" class="enq-close" data-close aria-label="Close the booking form"><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M2 2l12 12M14 2L2 14"/></svg></button>
+    </div>
+
+    <div class="enq-body">
+      <div class="enq-grid">
+        <div class="fld">
+          <label for="f-name">Name</label>
+          <input id="f-name" name="name" type="text" autocomplete="name" required aria-describedby="e-name">
+          <p class="ferr" id="e-name" hidden>Add your name.</p>
+        </div>
+        <div class="fld">
+          <label for="f-phone">Phone number</label>
+          <input id="f-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required aria-describedby="e-phone">
+          <p class="ferr" id="e-phone" hidden>Add a number to reach you on.</p>
+        </div>
+        <div class="fld">
+          <label for="f-date">Event date</label>
+          <input id="f-date" name="date" type="date" required aria-describedby="e-date">
+          <p class="ferr" id="e-date" hidden>Choose a date.</p>
+        </div>
+        <div class="fld">
+          <label for="f-city">City</label>
+          <input id="f-city" name="city" type="text" autocomplete="address-level2" required aria-describedby="e-city">
+          <p class="ferr" id="e-city" hidden>Add the city.</p>
+        </div>
+        <div class="fld">
+          <label for="f-type">Type of event</label>
+          <select id="f-type" name="type">
+            <option value="">Select</option>
+            <option>Brand or corporate evening</option>
+            <option>Wedding or sangeet</option>
+            <option>Festival or concert</option>
+            <option>Private party</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="fld">
+          <label for="f-aud">Expected audience</label>
+          <select id="f-aud" name="audience">
+            <option value="">Select</option>
+            <option>Under 100</option>
+            <option>100 to 300</option>
+            <option>300 to 1,000</option>
+            <option>Over 1,000</option>
+          </select>
+        </div>
+        <fieldset class="fld wide">
+          <legend class="fld-l">Preferred format</legend>
+          <div class="fseg">
+            <label><input type="radio" name="format" value="Solo with backing tracks"><span>Solo</span></label>
+            <label><input type="radio" name="format" value="With an accompanist"><span>Accompanist</span></label>
+            <label><input type="radio" name="format" value="Full band"><span>Full band</span></label>
+          </div>
+        </fieldset>
+        <div class="fld">
+          <label for="f-len">Set length</label>
+          <input id="f-len" name="setlength" type="text">
+        </div>
+        <div class="fld">
+          <label for="f-songs">Song requests</label>
+          <input id="f-songs" name="songs" type="text">
+        </div>
+        <div class="fld wide">
+          <label for="f-custom">Custom request</label>
+          <textarea id="f-custom" name="custom" rows="2"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="enq-foot">
+      <button type="submit" value="mail" class="btn btn-ghost"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg> Email</button>
+      <button type="submit" value="wa" class="btn btn-primary"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-whatsapp"/></svg> WhatsApp</button>
+    </div>
+  </form>
+
+  <div class="enq-done" hidden tabindex="-1">
+    <h2 class="enq-title" id="enq-done-h">Message ready</h2>
+    <p id="enq-done-p">Press send to reach Ranjitha.</p>
+    <button type="button" class="btn btn-ghost btn-small" data-close>Done</button>
+  </div>
+</dialog>
+
+<script>
+/* Booking form: builds a WhatsApp or email message from the answers. No data leaves the page until the visitor presses send in their own app. */
+(function(){
+  var dlg = document.getElementById('enquiry');
+  if (!dlg || typeof dlg.showModal !== 'function') return; /* old browsers keep the #booking links */
+  var form = dlg.querySelector('.enq-form');
+  var done = dlg.querySelector('.enq-done');
+  var opener = null;
+  var date = form.elements.date;
+  var t = new Date(); t.setMinutes(t.getMinutes() - t.getTimezoneOffset());
+  date.min = t.toISOString().slice(0, 10);
+
+  function open(e){
+    if (e) e.preventDefault();
+    opener = document.activeElement;
+    form.hidden = false; done.hidden = true;
+    dlg.setAttribute('aria-labelledby', 'enq-h');
+    dlg.showModal();
+    form.elements.name.focus();
+  }
+  function close(){ dlg.close(); }
+  dlg.addEventListener('close', function(){ if (opener && opener.focus) opener.focus(); });
+  document.querySelectorAll('[data-enquire]').forEach(function(el){ el.addEventListener('click', open); });
+  dlg.querySelectorAll('[data-close]').forEach(function(el){ el.addEventListener('click', close); });
+  dlg.addEventListener('click', function(e){ if (e.target === dlg) close(); });
+
+  var checks = [
+    ['name',  function(v){ return v.trim().length > 0; }],
+    ['phone', function(v){ return v.replace(/\D/g, '').length >= 7; }],
+    ['date',  function(v){ return v !== ''; }],
+    ['city',  function(v){ return v.trim().length > 0; }]
+  ];
+  function setErr(name, bad){
+    var el = form.elements[name];
+    el.setAttribute('aria-invalid', bad ? 'true' : 'false');
+    document.getElementById('e-' + name).hidden = !bad;
+  }
+  checks.forEach(function(c){
+    form.elements[c[0]].addEventListener('input', function(){
+      if (this.getAttribute('aria-invalid') === 'true') setErr(c[0], !c[1](this.value));
+    });
+  });
+
+  function nice(iso){
+    var p = iso.split('-');
+    return new Date(+p[0], p[1] - 1, +p[2]).toLocaleDateString('en-GB', { weekday:'short', day:'numeric', month:'long', year:'numeric' });
+  }
+  function message(nl){
+    var f = form.elements, fmt = form.querySelector('input[name=format]:checked');
+    var rows = [
+      ['Name', f.name.value], ['Phone', f.phone.value],
+      ['Event date', f.date.value ? nice(f.date.value) : ''], ['City', f.city.value],
+      ['Type of event', f.type.value], ['Expected audience', f.audience.value],
+      ['Preferred format', fmt ? fmt.value : ''], ["Set length", f.setlength.value],
+      ['Song requests', f.songs.value], ['Custom request', f.custom.value]
+    ];
+    var out = ["Hi Ranjitha, I'd like to check your availability for an event.", ''];
+    rows.forEach(function(r){ var v = r[1].trim(); if (v) out.push(r[0] + ': ' + v); });
+    out.push('', 'Thanks,', f.name.value.trim());
+    return out.join(nl);
+  }
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var firstBad = null;
+    checks.forEach(function(c){
+      var bad = !c[1](form.elements[c[0]].value);
+      setErr(c[0], bad);
+      if (bad && !firstBad) firstBad = form.elements[c[0]];
+    });
+    if (firstBad){ firstBad.focus(); return; }
+
+    var via = e.submitter && e.submitter.value === 'mail' ? 'mail' : 'wa';
+    if (via === 'wa'){
+      window.open('https://wa.me/917892114422?text=' + encodeURIComponent(message('\n')), '_blank', 'noopener');
+    } else {
+      var subj = 'Booking enquiry: ' + [form.elements.type.value, form.elements.city.value.trim()].filter(Boolean).join(', ');
+      location.href = 'mailto:askyellur@gmail.com?subject=' + encodeURIComponent(subj) + '&body=' + encodeURIComponent(message('\r\n'));
+    }
+    document.getElementById('enq-done-p').textContent = via === 'wa'
+      ? 'It\'s open in WhatsApp. Press send there to reach Ranjitha.'
+      : 'It\'s open in your email app. Press send there to reach Ranjitha.';
+    form.hidden = true; done.hidden = false;
+    dlg.setAttribute('aria-labelledby', 'enq-done-h');
+    done.focus();
+  });
+})();
+</script>
+
+<script>
+/* Release videos play in place (youtube-nocookie) on a plain click; modified clicks still open YouTube */
+document.querySelectorAll('.track-media[data-yt]').forEach(function(a){
+  a.addEventListener('click', function(e){
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.button) return;
+    e.preventDefault();
+    var f = document.createElement('iframe');
+    f.src = 'https://www.youtube-nocookie.com/embed/' + a.dataset.yt + '?autoplay=1&rel=0';
+    f.title = a.getAttribute('aria-label').replace(/^Play the /, '');
+    f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+    f.allowFullscreen = true;
+    var box = document.createElement('div');
+    box.className = 'track-media'; box.appendChild(f);
+    a.replaceWith(box); f.focus();
+  });
+});
+</script>
 
 <script src="gradient-ascii.js"></script>
 <script>
